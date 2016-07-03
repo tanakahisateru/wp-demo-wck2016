@@ -1,0 +1,37 @@
+/.idea
+/.vagrant
+playbook.retry
+
+# wp-cliとcomposerでインストールできるもの
+/docroot/vendor/
+/docroot/wp-admin/
+/docroot/wp-includes/
+/docroot/*.php
+/docroot/license.txt
+/docroot/readme.html
+
+/docroot/wp-content/languages/
+/docroot/wp-content/plugins/*
+/docroot/wp-content/themes/*
+/docroot/wp-content/index.php
+
+# 動的に生成されるので管理しなくていいもの
+/docroot/.htaccess
+/docroot/sitemap.xml
+/docroot/sitemap.xml.gz
+/docroot/wp-content/advanced-cache.php
+/docroot/wp-content/backup-db/
+/docroot/wp-content/backups/
+/docroot/wp-content/blogs.dir/
+/docroot/wp-content/cache/
+/docroot/wp-content/upgrade/
+/docroot/wp-content/uploads/
+/docroot/wp-content/wp-cache-config.php
+
+
+# 自分で書くコードは無視しない
+!/docroot/wp-content/plugins/site
+!/docroot/wp-content/themes/site
+
+!/docroot/favicon.ico
+!/docroot/google*.html

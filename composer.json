@@ -1,0 +1,20 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "config": {
+        "vendor-dir": "docroot/vendor"
+    },
+    "extra": {
+        "installer-paths": {
+            "docroot/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "docroot/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        }
+    }
+}

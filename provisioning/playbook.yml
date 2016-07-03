@@ -1,0 +1,52 @@
+---
+- hosts: default
+  remote_user: vagrant
+  become: yes
+  vars:
+    httpd:
+      user: vagrant
+      group: vagrant
+    mysql:
+      db: wpdemo
+      user: wordpress
+      password: wordpresspass
+  tasks:
+    - yum: name=libselinux-python state=present
+    - yum: name=MySQL-python state=present
+    - selinux: state=disabled
+    - service: name=iptables state=stopped enabled=no
+
+    - yum: name=epel-release state=present
+    - yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+
+    - yum: name={{ item }} state=present enablerepo=remi-php70
+      with_items:
+        - git
+        - vim
+        - python-pip
+        - httpd
+        - php
+        - php-mysqlnd
+        - php-mbstring
+        - php-opcache
+        - php-xml
+        - php-pecl-xdebug
+        - mysql
+        - mysql-server
+
+    - script: scripts/install-wp-cli.sh creates=/usr/local/bin/wp
+    - command: /usr/local/bin/wp cli update
+
+    - template: src=templates/httpd.conf dest=/etc/httpd/conf/httpd.conf backup=yes
+
+    - file: path=/var/www/html owner=vagrant group=vagrant
+
+    - service: name=httpd state=restarted enabled=yes
+
+    - service: name=mysqld state=started enabled=yes
+
+    - mysql_db: name={{ mysql.db }} state=present
+    - mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.db }}.*:ALL state=present
+
+    - script: scripts/setup-wordpress.sh
+      become: no
