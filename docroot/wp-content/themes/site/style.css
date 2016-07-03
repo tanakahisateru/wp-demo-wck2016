@@ -1,0 +1,24 @@
+/*
+Theme Name: Demo Site Theme
+Template: twentysixteen
+Version: 0.1
+Text Domain: site
+*/
+
+a {
+    color: #70d071;
+}
+
+.site-header {
+    background: #70d071;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    color: #ffffff;
+}
+.site-branding .site-title a {
+    color: #ffffff;
+}
+.site-description {
+    color: #eeeeee;
+}
