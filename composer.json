@@ -6,8 +6,17 @@
         }
     ],
     "require": {
-        "composer/installers": "~1.0"
+        "composer/installers": "~1.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "aws/aws-sdk-php": "^3.18",
+        "ua-parser/uap-php": "^3.4",
+        "wpackagist-plugin/contact-form-7": "^4.4",
+        "wpackagist-plugin/tinymce-advanced": "^4.3",
+        "wpackagist-plugin/rest-api": "^2.0@beta",
+        "wpackagist-theme/wck2014": "^1.3",
+        "wpackagist-theme/twentythirteen": "^1.9"
     },
+    "minimum-stability": "beta",
     "config": {
         "vendor-dir": "docroot/vendor"
     },
