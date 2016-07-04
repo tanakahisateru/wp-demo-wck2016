@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "bento/centos-6.7"
+  config.vm.box = "bento/centos-7.1"
   config.vm.network "private_network", ip: "192.168.7.10"
 
   config.vm.provision :ansible_local do |ansible|

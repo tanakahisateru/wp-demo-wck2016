@@ -12,14 +12,22 @@
       password: wordpresspass
   tasks:
     - yum: name=libselinux-python state=present
-    - yum: name=MySQL-python state=present
     - selinux: state=disabled
-    - service: name=iptables state=stopped enabled=no
+    - service: name=firewalld state=stopped enabled=no
 
+    - yum: name=yum-utils state=present
     - yum: name=epel-release state=present
-    - yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+    - yum: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm state=present
+    - yum: name=http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm state=present
+    - command: yum-config-manager --disable mysql57-community
+    - command: yum-config-manager --enable mysql56-community
+    - command: yum-config-manager --enable remi-php70
 
-    - yum: name={{ item }} state=present enablerepo=remi-php70
+    - yum: name={{ item }} state=absent
+      with_items:
+        - mariadb-libs
+
+    - yum: name={{ item }} state=present
       with_items:
         - git
         - vim
@@ -33,6 +41,7 @@
         - php-pecl-xdebug
         - mysql
         - mysql-server
+        - postfix
 
     - script: scripts/install-wp-cli.sh creates=/usr/local/bin/wp
     - command: /usr/local/bin/wp cli update
@@ -43,8 +52,10 @@
 
     - service: name=httpd state=restarted enabled=yes
 
+#    - command: mysqladmin -u root password 'rootpass'
     - service: name=mysqld state=started enabled=yes
 
+    - yum: name=MySQL-python state=present
     - mysql_db: name={{ mysql.db }} state=present
     - mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.db }}.*:ALL state=present
 
