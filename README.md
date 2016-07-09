@@ -14,8 +14,9 @@
 次のようにDBの準備をします。
 
 ```sql
-CREATE DATABASE wpdemo;
 CREATE USER wordpress@localhost IDENTIFIED BY 'wordpresspass';
+
+CREATE DATABASE wpdemo;
 GRANT ALL ON wpdemo.* TO wordpress@localhost;
 ```
 
@@ -78,6 +79,12 @@ selenium-server -p 4444
 
 (Macでしか確認していません。他のOSではそれぞれの方法で適宜インストールしてください)
 
+テスト用のDBを追加します。FunctionalとIntegrationではここにDBダンプを流し込むようです。
+
+```sql
+CREATE DATABASE `wpdemo-tests`;
+GRANT ALL ON `wpdemo-tests`.* TO wordpress@localhost;
+```
 
 Codeceptionヘルパーの生成 (モジュールを追加/削除したら要再実行)
 
