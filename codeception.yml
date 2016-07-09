@@ -1,0 +1,59 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+    config:
+        Db:
+            dsn: 'mysql:host=localhost;dbname=wpdemo-tests'
+            user: wordpress
+            password: wordpresspass
+            dump: tests/_data/dump.sql
+        WPBrowser:
+            url: 'http://localhost:8000'
+            adminUsername: root
+            adminPassword: rootpass
+            adminUrl: /wp-admin
+        WPDb:
+            dsn: 'mysql:host=localhost;dbname=wpdemo-tests'
+            user: wordpress
+            password: wordpresspass
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://localhost:8000'
+            tablePrefix: wp_
+        WPLoader:
+            wpRootFolder: docroot
+            dbName: wpdemo-tests
+            dbHost: localhost
+            dbUser: wordpress
+            dbPassword: wordpresspass
+            wpDebug: true
+            dbCharset: utf8
+            dbCollate: ''
+            tablePrefix: wp_
+            domain: localhost:8000
+            adminEmail: admin@wp.local
+            title: 'WP Tests'
+            phpBinary: php
+            language: ''
+            # plugins: [hello.php, my-plugin/my-plugin.php]
+            # activatePlugins: [hello.php, my-plugin/my-plugin.php]
+            # bootstrapActions: [my-first-action, my-second-action]
+        WPWebDriver:
+            url: 'http://localhost:8000'
+            browser: chrome
+            port: 4444
+            restart: true
+            wait: 2
+            # window_size: '1024x768'
+            adminUsername: root
+            adminPassword: rootpass
+            adminUrl: /wp-admin

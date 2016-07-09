@@ -2,14 +2,17 @@
 - hosts: default
   remote_user: vagrant
   become: yes
+
   vars:
     httpd:
       user: vagrant
       group: vagrant
     mysql:
       db: wpdemo
+      db_test: wpdemo-tests
       user: wordpress
       password: wordpresspass
+
   tasks:
     - yum: name=libselinux-python state=present
     - selinux: state=disabled
@@ -57,7 +60,9 @@
 
     - yum: name=MySQL-python state=present
     - mysql_db: name={{ mysql.db }} state=present
+    - mysql_db: name={{ mysql.db_test }} state=present
     - mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.db }}.*:ALL state=present
+    - mysql_user: name={{ mysql.user }} priv={{ mysql.db_test }}.*:ALL state=present
 
     - script: scripts/setup-wordpress.sh
       become: no

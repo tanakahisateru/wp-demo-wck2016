@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# CREATE DATABASE wpdemo;
 # CREATE USER wordpress@localhost IDENTIFIED BY 'wordpresspass';
+
+# CREATE DATABASE wpdemo;
+# CREATE DATABASE `wpdemo-tests`;
 # GRANT ALL ON wpdemo.* TO wordpress@localhost;
+# GRANT ALL ON `wpdemo-tests`.* TO wordpress@localhost;
 
 wp core download --path=docroot --locale=ja --version=4.5.3
 

@@ -35,3 +35,6 @@ playbook.retry
 
 !/docroot/favicon.ico
 !/docroot/google*.html
+
+/tests/_support/_generated
+/tests/_output/*

@@ -5,10 +5,9 @@
 
 - PHP 任意
 - MySQL 任意
-- Vagrant 1.8
 - Composer
 - WP-CLI
-- bash
+- bash などのシェル (cmd.exeはどうなんだろ?)
 
 ## ローカル開発
 
@@ -40,6 +39,9 @@ Apache で `.htaccess` を使いたい場合は、XAMPP 等の設定あわせて
 
 ## デプロイの個人リハーサル
 
+- Vagrant 1.8
+- VirtualBox など
+
 `vagrant up` で、MySQL に WordPress 用のデータベースを持ち、ドキュメントルートに素の WordPress を置いただけの Web サーバーが起動します。
 
 `http://192.168.7.10/` にアクセスし、ブラウザから初期設定を行います。
@@ -60,3 +62,38 @@ SFTPで `./docroot` を `/var/www/html` にアップロードしてください�
 
 やり直したいときは `vagrant destroy` で最初から。
 
+## 自動テスト
+
+Chromeで受け入れテストをしたいので、追加でSeleniumを導入します。
+
+- selenium-server-standalone
+- chromedriver
+
+Homebrew があれば簡単にこれで:
+
+```bash
+brew install selenium-server-standalone chromedriver
+selenium-server -p 4444
+```
+
+(Macでしか確認していません。他のOSではそれぞれの方法で適宜インストールしてください)
+
+
+Codeceptionヘルパーの生成 (モジュールを追加/削除したら要再実行)
+
+```bash
+docroot/vendor/bin/wpcept build
+```
+
+実行
+
+```bash
+docroot/vendor/bin/wpcept run                            #すべて
+docroot/vendor/bin/wpcept run acceptance                 #acceptance のみ
+docroot/vendor/bin/wpcept run acceptance HelloWorldCept  #acceptance/HelloWorldCept のみ
+```
+
+新規テストスクリプトの生成
+```bash
+docroot/vendor/bin/wpcept generate:cept acceptance Hoge
+```
