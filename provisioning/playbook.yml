@@ -62,7 +62,7 @@
     - mysql_db: name={{ mysql.db }} state=present
     - mysql_db: name={{ mysql.db_test }} state=present
     - mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.db }}.*:ALL state=present
-    - mysql_user: name={{ mysql.user }} priv={{ mysql.db_test }}.*:ALL state=present
+    - mysql_user: name={{ mysql.user }} append_privs=true priv={{ mysql.db_test }}.*:ALL state=present
 
     - script: scripts/setup-wordpress.sh
       become: no
