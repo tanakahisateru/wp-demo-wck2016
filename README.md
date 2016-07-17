@@ -25,12 +25,6 @@ GRANT ALL ON wpdemo.* TO wordpress@localhost;
 PHPビルトインサーバーだけで動きます。
 
 ```bash
-php -S 0.0.0.0:8000 -t docroot
-```
-
-or 
-
-```bash
 wp server --host=0.0.0.0 --port=8000 --docroot=docroot
 ```
 
