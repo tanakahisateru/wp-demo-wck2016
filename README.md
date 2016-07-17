@@ -28,6 +28,12 @@ PHPビルトインサーバーだけで動きます。
 php -S 0.0.0.0:8000 -t docroot
 ```
 
+or 
+
+```bash
+wp server --host=0.0.0.0 --port=8000 --docroot=docroot
+```
+
 Apache で `.htaccess` を使いたい場合は、XAMPP 等の設定あわせて適宜スクリプト修正を。
 
 やり直したいときは、DBを削除して `docroot` を消します。ごっそり消すと Git に削除 diff が出るので、
